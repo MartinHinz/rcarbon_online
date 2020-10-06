@@ -34,7 +34,21 @@ ui <- fluidPage(
         mainPanel(
             h2(textOutput("calibRange")),
             
-            plotOutput("calibPlot")
+            plotOutput("calibPlot"),
+            HTML(
+                "<p>This small online tool is based on the R Package ´rcarbon´ (Crema/Bevan 2020)
+                       and can be used for quick calibration of <sup>14</sup>C dates online.</p>
+                       
+                       <p>If you consider more elaborated tasks, why not using the original package inside R?</p>
+                       
+                       <p>You can find the package at <a href='https://github.com/ahb108/rcarbon'>https://github.com/ahb108/rcarbon!</a> </p>
+                       
+                       <h3>References:</h3>
+                       
+                       <p>Crema, E.R., Bevan, A. 2020
+                       Inference from Large Sets of Radiocarbon Dates:
+                       Software and Methods Radiocarbon,
+                       doi:10.1017/RDC.2020.95</p>")
         )
     )
 )
