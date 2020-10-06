@@ -71,7 +71,7 @@ server <- function(input, output) {
         }
         ext <- c(ext1,ext2)
         
-        text_cal_range_bcad <- paste(cal_range_bcad, ext)
+        text_cal_range_bcad <- paste(abs(cal_range_bcad), ext)
         out_cal_range_bcad <- paste0(text_cal_range_bcad, collapse = " – ")
         
         # get sigma ranges
