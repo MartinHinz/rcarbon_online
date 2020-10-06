@@ -15,7 +15,7 @@ library(rcarbon)
 ui <- fluidPage(
     
     # Application title
-    titlePanel("14C calibration using rcarbon"),
+    titlePanel(HTML(paste0(tags$sup("14"), "C calibration using rcarbon"))),
     
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
