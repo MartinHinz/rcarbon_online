@@ -13,10 +13,10 @@ library(rcarbon)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
+    
     # Application title
     titlePanel("14C calibration using rcarbon"),
-
+    
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
@@ -26,26 +26,26 @@ ui <- fluidPage(
             numericInput("std",
                          "Standard Deviation uncalibrated BP Value:",
                          value = 25)
-                
+            
         ),
         
-
+        
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("calibPlot"),
-           h2("Result:"),
-           h2(textOutput("calibRange"))
+            h2(textOutput("calibRange")),
+            
+            plotOutput("calibPlot")
         )
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
+    
     output$calibPlot <- renderPlot({
         # generate bins based on input$bins from ui.R
         result <- calibrate(x = input$bp,errors = input$std)
-
+        
         # draw the histogram with the specified number of bins
         plot(result, HPD = T)
     })
@@ -60,14 +60,14 @@ server <- function(input, output) {
         out_cal_range <- paste0(cal_range, collapse = " – ")
         
         cal_range_bcad <- rcarbon::BPtoBCAD(cal_range)
-
+        
         if (cal_range_bcad[1]>0 & cal_range_bcad[2]>0) {        
-        ext1 <- ""; ext2 = "AD"
+            ext1 <- ""; ext2 = "cal AD"
         } else if (cal_range_bcad[1]<=0 & cal_range_bcad[2]<=0) {
-            ext1 <- ""; ext2 = "BC"
+            ext1 <- ""; ext2 = "cal BC"
         } else {
-            ext1 <- ifelse(cal_range_bcad[1]>0, "AD", "BC")
-            ext2 <- ifelse(cal_range_bcad[2]>0, "AD", "BC")
+            ext1 <- ifelse(cal_range_bcad[1]>0, "cal AD", "cal BC")
+            ext2 <- ifelse(cal_range_bcad[2]>0, "cal AD", "cal BC")
         }
         ext <- c(ext1,ext2)
         
